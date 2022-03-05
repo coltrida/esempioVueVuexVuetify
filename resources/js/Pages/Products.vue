@@ -5,7 +5,7 @@
             color="blue"
             text
         >
-            <h2>Products</h2>
+            <h2>Products {{getVisualizzaMessaggio}}</h2>
         </v-alert>
 
         <v-row>
@@ -29,36 +29,64 @@
                     class="mr-4"
                     @click="inserisci"
                 >
-                    Inserisci
+                    {{testoBtn}}
                 </v-btn>
             </v-col>
         </v-row>
 
-        <tabella />
-
+        <tabella @modificaProduct = "modifica"/>
+        <messaggio />
     </v-container>
 </template>
 
 <script>
     import {mapActions, mapGetters} from "vuex";
     import Tabella from "./Tabella";
+    import Messaggio from "../Components/Messaggio";
     export default {
-        components: {Tabella},
+        components: {Messaggio, Tabella},
         data: () => ({
+            switchModifica:false,
             prodotto: {},
         }),
 
         methods: {
             ...mapActions('product', {
                 addProdotto: 'addProdotto',
+                modificaProdotto: 'modificaProdotto',
             }),
 
             inserisci() {
-                this.addProdotto(this.prodotto).then(() => {
-                    this.prodotto = {}
-                });
+                this.$store.commit('product/resetMessaggio');
+                if (this.switchModifica) {
+                    this.modificaProdotto(this.prodotto).then(() => {
+                        this.prodotto = {};
+                        this.switchModifica = false;
+                    });
+                }else{
+                    this.addProdotto(this.prodotto).then(() => {
+                        this.prodotto = {};
+                    });
+                }
+
+            },
+
+            modifica(product){
+                this.prodotto = product;
+                this.switchModifica = true;
             }
+
         },
+
+        computed: {
+            ...mapGetters('product', {
+                getVisualizzaMessaggio: 'getVisualizzaMessaggio',
+            }),
+
+            testoBtn(){
+                return this.switchModifica ? 'Modifica' : 'Inserisci';
+            }
+        }
     }
 </script>
 

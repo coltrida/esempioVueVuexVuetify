@@ -2295,13 +2295,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var state = function state() {
   return {
-    prodotti: []
+    prodotti: [],
+    testoMessaggio: '',
+    visualizzaMessaggio: false
   };
 };
 
 var getters = {
   getProdotti: function getProdotti(state) {
     return state.prodotti;
+  },
+  getTestoMessaggio: function getTestoMessaggio(state) {
+    return state.testoMessaggio;
+  },
+  getVisualizzaMessaggio: function getVisualizzaMessaggio(state) {
+    return state.visualizzaMessaggio;
   }
 };
 var actions = {
@@ -2350,6 +2358,52 @@ var actions = {
         }
       }, _callee2);
     }))();
+  },
+  deleteProdotto: function deleteProdotto(_ref3, idProduct) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              commit = _ref3.commit;
+              _context3.next = 3;
+              return axios["delete"]("".concat((0,_help__WEBPACK_IMPORTED_MODULE_1__["default"])().linkproduct) + '/' + idProduct);
+
+            case 3:
+              commit('rimuoviProdotto', idProduct);
+              commit('deleteProdotto');
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  },
+  modificaProdotto: function modificaProdotto(_ref4, prodotto) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var commit, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              commit = _ref4.commit;
+              _context4.next = 3;
+              return axios.put("".concat((0,_help__WEBPACK_IMPORTED_MODULE_1__["default"])().linkproduct) + '/' + prodotto.id, prodotto);
+
+            case 3:
+              response = _context4.sent;
+              commit('modificaProdotto', response.data);
+
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
   }
 };
 var mutations = {
@@ -2358,6 +2412,25 @@ var mutations = {
   },
   addProdotto: function addProdotto(state, payload) {
     state.prodotti.unshift(payload);
+    state.testoMessaggio = 'Prodotto aggiunto';
+    state.visualizzaMessaggio = true;
+  },
+  deleteProdotto: function deleteProdotto(state) {
+    state.testoMessaggio = 'Prodotto eliminato';
+    state.visualizzaMessaggio = true;
+  },
+  rimuoviProdotto: function rimuoviProdotto(state, idProduct) {
+    state.prodotti = state.prodotti.filter(function (ele) {
+      return ele.id !== idProduct;
+    });
+  },
+  modificaProdotto: function modificaProdotto(state, payload) {
+    state.prodotti.unshift(payload);
+    state.testoMessaggio = 'Prodotto modificato';
+    state.visualizzaMessaggio = true;
+  },
+  resetMessaggio: function resetMessaggio(state) {
+    state.visualizzaMessaggio = false;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({

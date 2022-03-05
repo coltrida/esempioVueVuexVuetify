@@ -18,4 +18,14 @@ class ProductController extends Controller
     {
         return $productService->inserisci($request);
     }
+
+    public function elimina($idProduct, ProductService $productService)
+    {
+        $productService->elimina($idProduct);
+    }
+
+    public function modifica($idProduct, ProductRequest $request, ProductService $productService)
+    {
+        return $productService->modifica($idProduct, $request);
+    }
 }

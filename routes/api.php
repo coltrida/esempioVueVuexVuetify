@@ -18,3 +18,5 @@ Route::post('register', [UserController::class, 'register']);*/
 
 Route::get('products', [ProductController::class, 'products']);
 Route::post('addProduct', [ProductController::class, 'inserisci']);
+Route::delete('products/{idProduct}', [ProductController::class, 'elimina']);
+Route::put('products/{idProduct}', [ProductController::class, 'modifica']);

@@ -22,4 +22,19 @@ class ProductService
 
         return $prodotto;
     }
+
+    public function elimina($idProduct)
+    {
+        Product::find($idProduct)->delete();
+    }
+
+    public function modifica($idProduct, $request)
+    {
+        $prodotto = Product::find($idProduct);
+        $prodotto->nome = $request->nome;
+        $prodotto->tipologia = $request->tipologia;
+        $prodotto->save();
+
+        return $prodotto;
+    }
 }

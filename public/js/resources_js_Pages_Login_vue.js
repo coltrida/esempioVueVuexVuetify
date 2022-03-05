@@ -55,9 +55,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      show1: false,
       valid: true,
       user: {},
       emailRules: [function (v) {
@@ -169,7 +188,12 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
+    { staticClass: "py-16" },
     [
+      _c("v-alert", { attrs: { outlined: "", color: "blue", text: "" } }, [
+        _c("h2", [_vm._v("Login")]),
+      ]),
+      _vm._v(" "),
       _c(
         "v-form",
         {
@@ -197,10 +221,16 @@ var render = function () {
           _vm._v(" "),
           _c("v-text-field", {
             attrs: {
+              "append-icon": _vm.show1 ? "mdi-eye" : "mdi-eye-off",
               rules: _vm.passwordRules,
+              type: _vm.show1 ? "text" : "password",
               label: "password",
-              required: "",
-              type: "password",
+              autocomplete: "on",
+            },
+            on: {
+              "click:append": function ($event) {
+                _vm.show1 = !_vm.show1
+              },
             },
             model: {
               value: _vm.user.password,

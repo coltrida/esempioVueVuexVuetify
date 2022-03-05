@@ -1,5 +1,13 @@
 <template>
-    <v-container>
+    <v-container class="py-16">
+        <v-alert
+            outlined
+            color="blue"
+            text
+        >
+            <h2>Login</h2>
+        </v-alert>
+
         <v-form
             ref="form"
             v-model="valid"
@@ -13,12 +21,23 @@
                 required
             ></v-text-field>
 
-            <v-text-field
+            <!--<v-text-field
                 v-model="user.password"
                 :rules="passwordRules"
                 label="password"
                 required
                 type="password"
+                autocomplete="on"
+            ></v-text-field>-->
+
+            <v-text-field
+                v-model="user.password"
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :rules="passwordRules"
+                :type="show1 ? 'text' : 'password'"
+                label="password"
+                @click:append="show1 = !show1"
+                autocomplete="on"
             ></v-text-field>
 
             <v-btn
@@ -39,12 +58,12 @@
             </v-btn>
         </v-form>
     </v-container>
-
 </template>
 
 <script>
     export default {
         data: () => ({
+            show1: false,
             valid: true,
             user: {},
             emailRules: [

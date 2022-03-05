@@ -18,8 +18,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Register"
+  data: function data() {
+    return {
+      valid: true,
+      user: {},
+      emailRules: [function (v) {
+        return !!v || 'E-mail obbligatoria';
+      }, function (v) {
+        return /.+@.+\..+/.test(v) || 'E-mail deve essere valida';
+      }],
+      passwordRules: [function (v) {
+        return !!v || 'password obbligatoria';
+      }]
+    };
+  },
+  methods: {
+    registrazione: function registrazione() {
+      this.$refs.form.validate();
+      console.log(this.user);
+    },
+    reset: function reset() {
+      this.$refs.form.reset();
+    }
+  }
 });
 
 /***/ }),
@@ -108,16 +182,98 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "v-container",
+    { staticClass: "py-16" },
+    [
+      _c("v-alert", { attrs: { outlined: "", color: "blue", text: "" } }, [
+        _c("h2", [_vm._v("Register")]),
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-form",
+        {
+          ref: "form",
+          attrs: { "lazy-validation": "" },
+          model: {
+            value: _vm.valid,
+            callback: function ($$v) {
+              _vm.valid = $$v
+            },
+            expression: "valid",
+          },
+        },
+        [
+          _c("v-text-field", {
+            attrs: { rules: _vm.emailRules, label: "E-mail", required: "" },
+            model: {
+              value: _vm.user.email,
+              callback: function ($$v) {
+                _vm.$set(_vm.user, "email", $$v)
+              },
+              expression: "user.email",
+            },
+          }),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: {
+              rules: _vm.passwordRules,
+              label: "password",
+              required: "",
+              autocomplete: "on",
+            },
+            model: {
+              value: _vm.user.password,
+              callback: function ($$v) {
+                _vm.$set(_vm.user, "password", $$v)
+              },
+              expression: "user.password",
+            },
+          }),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: {
+              rules: _vm.passwordRules,
+              label: "ripeti password",
+              required: "",
+              autocomplete: "on",
+            },
+            model: {
+              value: _vm.user.password_confirmation,
+              callback: function ($$v) {
+                _vm.$set(_vm.user, "password_confirmation", $$v)
+              },
+              expression: "user.password_confirmation",
+            },
+          }),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "mr-4",
+              attrs: { disabled: !_vm.valid, color: "success" },
+              on: { click: _vm.registrazione },
+            },
+            [_vm._v("\n            Register\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "mr-4",
+              attrs: { color: "error" },
+              on: { click: _vm.reset },
+            },
+            [_vm._v("\n            Reset\n        ")]
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Registrazione")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

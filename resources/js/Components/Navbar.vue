@@ -15,17 +15,12 @@
 
         <v-spacer></v-spacer>
 
-        <router-link :to="{ name: 'login'}">
+        <router-link :to="{ name: 'products'}">
             <v-btn text>
-                Login
+                Products
             </v-btn>
         </router-link>
 
-        <router-link :to="{ name: 'register'}">
-            <v-btn text>
-                Register
-            </v-btn>
-        </router-link>
     </v-app-bar>
 </template>
 
